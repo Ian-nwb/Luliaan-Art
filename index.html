@@ -67,6 +67,7 @@
     .nav-links {
       display: flex;
       gap: 2rem;
+      transition: all 0.3s ease;
     }
 
     .nav-links a {
@@ -96,6 +97,18 @@
       width: 100%;
     }
 
+    .menu-icon {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--text);
+      transition: color 0.3s;
+    }
+
+    .menu-icon:hover {
+      color: var(--accent);
+    }
+
     /* Hero */
     .hero {
       height: 100vh;
@@ -118,6 +131,7 @@
       border: 3px solid var(--accent);
       box-shadow: 0 0 30px rgba(221, 175, 209, 0.3);
       animation: glowPulse 4s ease-in-out infinite;
+      transition: width 0.3s, height 0.3s;
     }
 
     .hero-image img {
@@ -143,18 +157,21 @@
       margin-bottom: 1rem;
       color: var(--accent); /* Solid color, no gradient */
       font-weight: 800;
+      transition: font-size 0.3s;
     }
 
     .hero p {
       font-size: 1.3rem;
       max-width: 600px;
       opacity: 0.8;
+      transition: font-size 0.3s;
     }
 
     /* Sections */
     section {
       padding: 100px 5%;
       min-height: 80vh;
+      transition: padding 0.3s;
     }
 
     h2 {
@@ -163,6 +180,7 @@
       text-align: center;
       color: var(--accent); /* Solid color */
       font-weight: 800;
+      transition: font-size 0.3s;
     }
 
     /* Gallery */
@@ -172,6 +190,7 @@
       gap: 2rem;
       max-width: 1400px;
       margin: 0 auto;
+      transition: gap 0.3s;
     }
 
     .art-piece {
@@ -184,6 +203,7 @@
       user-select: none;
       -webkit-user-drag: none;
       height: 300px;
+      transition: height 0.3s;
     }
 
     .art-piece:hover {
@@ -218,11 +238,13 @@
     .art-title {
       font-size: 1.2rem;
       font-weight: 600;
+      transition: font-size 0.3s;
     }
 
     .art-year {
       font-size: 0.9rem;
       opacity: 0.7;
+      transition: font-size 0.3s;
     }
 
     /* Modal Styles */
@@ -280,17 +302,20 @@
       color: white;
       padding: 2rem 1.5rem 1.5rem;
       text-align: center;
+      transition: padding 0.3s;
     }
 
     .modal-title {
       font-size: 1.8rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
+      transition: font-size 0.3s;
     }
 
     .modal-year {
       font-size: 1.1rem;
       opacity: 0.8;
+      transition: font-size 0.3s;
     }
 
     .close-modal {
@@ -324,6 +349,7 @@
       text-align: center;
       font-size: 1.1rem;
       line-height: 1.8;
+      transition: font-size 0.3s;
     }
 
     .contact-content a {
@@ -345,6 +371,7 @@
       cursor: pointer;
       user-select: none;
       margin-top: 2rem;
+      transition: font-size 0.3s, gap 0.3s;
     }
 
     .theme-toggle input {
@@ -391,6 +418,7 @@
       padding: 3rem 5%;
       color: var(--text);
       opacity: 0.8;
+      transition: padding 0.3s, font-size 0.3s;
     }
 
     /* Prevent Image Download */
@@ -403,13 +431,253 @@
     }
 
     /* Responsive */
+    @media (max-width: 1024px) {
+      section {
+        padding: 80px 4%;
+      }
+
+      .gallery {
+        gap: 1.5rem;
+      }
+
+      .art-piece {
+        height: 250px;
+      }
+    }
+
     @media (max-width: 768px) {
-      .hero h1 { font-size: 2.8rem; }
-      .nav-links { gap: 1rem; font-size: 0.9rem; }
-      .gallery { grid-template-columns: 1fr; }
-      .modal-caption { padding: 1.5rem 1rem; }
-      .modal-title { font-size: 1.4rem; }
-      .theme-toggle { font-size: 0.9rem; }
+      nav {
+        padding: 1rem 3%;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+      }
+
+      .menu-icon {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--bg);
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.5rem 0;
+        display: none;
+        border-bottom: 1px solid var(--border);
+        z-index: 999;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        display: block;
+        text-align: center;
+        font-size: 1.1rem;
+      }
+
+      .nav-links a::after {
+        bottom: -4px;
+      }
+
+      .hero {
+        padding: 0 3%;
+      }
+
+      .hero-image {
+        width: 150px;
+        height: 150px;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        max-width: 90%;
+      }
+
+      section {
+        padding: 80px 3% 60px;
+        min-height: auto;
+      }
+
+      h2 {
+        font-size: 2.2rem;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .art-piece {
+        height: 250px;
+      }
+
+      .art-title {
+        font-size: 1.1rem;
+      }
+
+      .art-year {
+        font-size: 0.8rem;
+      }
+
+      .about-content, .contact-content {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+
+      .modal-caption {
+        padding: 1.5rem 1rem;
+      }
+
+      .modal-title {
+        font-size: 1.4rem;
+      }
+
+      .modal-year {
+        font-size: 1rem;
+      }
+
+      .theme-toggle {
+        font-size: 0.9rem;
+        gap: 8px;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .slider {
+        width: 50px;
+        height: 26px;
+      }
+
+      .slider:before {
+        width: 20px;
+        height: 20px;
+        left: 3px;
+        top: 3px;
+        font-size: 12px;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(24px);
+      }
+
+      footer {
+        padding: 2rem 3%;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 1.3rem;
+      }
+
+      .menu-icon {
+        font-size: 1.8rem;
+      }
+
+      .hero-image {
+        width: 120px;
+        height: 120px;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      .gallery {
+        gap: 1rem;
+      }
+
+      .art-piece {
+        height: 200px;
+      }
+
+      .art-overlay {
+        padding: 1rem;
+      }
+
+      .art-title {
+        font-size: 1rem;
+      }
+
+      .art-year {
+        font-size: 0.7rem;
+      }
+
+      .about-content, .contact-content {
+        font-size: 0.9rem;
+      }
+
+      .modal-content {
+        max-width: 95%;
+        max-height: 95%;
+      }
+
+      .modal-caption {
+        padding: 1rem 0.8rem;
+      }
+
+      .modal-title {
+        font-size: 1.2rem;
+      }
+
+      .modal-year {
+        font-size: 0.9rem;
+      }
+
+      .close-modal {
+        top: 10px;
+        right: 15px;
+        font-size: 2rem;
+        width: 35px;
+        height: 35px;
+      }
+
+      .theme-toggle {
+        font-size: 0.8rem;
+        gap: 6px;
+      }
+
+      .slider {
+        width: 45px;
+        height: 24px;
+      }
+
+      .slider:before {
+        width: 18px;
+        height: 18px;
+        left: 3px;
+        top: 3px;
+        font-size: 11px;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(21px);
+      }
+
+      footer {
+        padding: 1.5rem 3%;
+        font-size: 0.8rem;
+      }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
@@ -424,6 +692,7 @@
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
+    <div class="menu-icon" id="menuIcon">&#9776;</div>
   </nav>
 
   <!-- Hero -->
@@ -552,6 +821,14 @@
         const target = document.querySelector(this.getAttribute('href'));
         target.scrollIntoView({ behavior: 'smooth' });
       });
+    });
+
+    // Mobile Menu Toggle
+    const menuIcon = document.getElementById('menuIcon');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuIcon.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
     });
 
     // Modal Elements
