@@ -5,14 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Luliaan</title>
   <style>
-
     :root {
-      --bg: #ffe7a0;
-      --text: #da41f8; 
-      --accent: #da41f8; 
-      --accent-light: #da41f8; 
-      --card-bg: #111111;
-      --border: #fcfcfc;
+      --bg: #f8f1f7;
+      --text: #88669f; 
+      --accent: #ddafd1; 
+      --accent-light: #88669f; 
+      --card-bg: #fcfcfd;
+      --border: #fefefe;
+    }
+
+    [data-theme="dark"] {
+      --bg: #2d1b3a;
+      --text: #e8d5f0;
+      --accent: #ddafd1;
+      --accent-light: #a67bc7;
+      --card-bg: #3d2a4d;
+      --border: #5a3f6e;
     }
 
     * {
@@ -27,6 +35,7 @@
       font-family: 'Inter', 'Segoe UI', sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
+      transition: background-color 0.4s ease, color 0.4s ease;
     }
 
     /* Navigation Bar */
@@ -34,7 +43,7 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: #ffe7a0;
+      background: var(--bg);
       backdrop-filter: blur(12px);
       z-index: 1000;
       padding: 1rem 5%;
@@ -42,23 +51,18 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--border);
+      transition: background 0.4s ease;
     }
 
-.logo {
-  font-size: 1.8rem;
-  font-weight: 800;
-  text-decoration: none;
-  letter-spacing: 1px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-}
-
-
-
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 1px;
+      color: var(--accent);
+      transition: all 0.3s ease-in-out;
+      position: relative;
+    }
 
     .nav-links {
       display: flex;
@@ -101,7 +105,8 @@
       align-items: center;
       text-align: center;
       padding: 0 5%;
-      background:#ffe7a0;
+      background: var(--bg);
+      transition: background 0.4s ease;
     }
 
     .hero-image {
@@ -111,7 +116,7 @@
       overflow: hidden;
       margin-bottom: 2rem;
       border: 3px solid var(--accent);
-      box-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
+      box-shadow: 0 0 30px rgba(221, 175, 209, 0.3);
       animation: glowPulse 4s ease-in-out infinite;
     }
 
@@ -126,20 +131,18 @@
 
     @keyframes glowPulse {
       0%, 100% {
-        box-shadow: 0 0 20px rgba(237, 58, 58, 0.3);
+        box-shadow: 0 0 20px rgba(221, 175, 209, 0.3);
       }
       50% {
-        box-shadow: 0 0 35px rgba(237, 58, 58, 0.6);
+        box-shadow: 0 0 35px rgba(221, 175, 209, 0.6);
       }
     }
 
     .hero h1 {
       font-size: 4rem;
       margin-bottom: 1rem;
-      background: linear-gradient(90deg, var(--accent), var(--accent-light));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--accent); /* Solid color, no gradient */
+      font-weight: 800;
     }
 
     .hero p {
@@ -153,14 +156,13 @@
       padding: 100px 5%;
       min-height: 80vh;
     }
+
     h2 {
       font-size: 2.8rem;
       margin-bottom: 3rem;
       text-align: center;
-      background: linear-gradient(90deg, var(--accent), var(--accent-light));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--accent); /* Solid color */
+      font-weight: 800;
     }
 
     /* Gallery */
@@ -181,9 +183,6 @@
       cursor: pointer;
       user-select: none;
       -webkit-user-drag: none;
-      -khtml-user-drag: none;
-      -moz-user-drag: none;
-      -o-user-drag: none;
       height: 300px;
     }
 
@@ -255,7 +254,7 @@
       max-height: 90%;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(255, 138, 138, 0.3);
+      box-shadow: 0 20px 60px rgba(221, 175, 209, 0.3);
       animation: zoomIn 0.4s ease;
     }
 
@@ -336,9 +335,62 @@
       text-decoration: underline;
     }
 
+    /* Dark Mode Toggle */
+    .theme-toggle {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+      margin-top: 2rem;
+    }
+
+    .theme-toggle input {
+      display: none;
+    }
+
+    .slider {
+      position: relative;
+      width: 60px;
+      height: 30px;
+      background: #ccc;
+      border-radius: 50px;
+      transition: 0.4s;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .slider:before {
+      content: "🌙";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      left: 4px;
+      top: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    input:checked + .slider {
+      background: #88669f;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(30px);
+      content: "☀️";
+    }
+
     footer {
       text-align: center;
       padding: 3rem 5%;
+      color: var(--text);
+      opacity: 0.8;
     }
 
     /* Prevent Image Download */
@@ -357,6 +409,7 @@
       .gallery { grid-template-columns: 1fr; }
       .modal-caption { padding: 1.5rem 1rem; }
       .modal-title { font-size: 1.4rem; }
+      .theme-toggle { font-size: 0.9rem; }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
@@ -390,7 +443,7 @@
     <div class="gallery">
 
       <!-- Art Piece 1 -->
-      <div class="art-piece" data-title="Full Sketch something" data-year="2025" data-src="assets\89b5ccdf-10d8-4eb9-921f-4e063a7d49c7.jfif">
+      <div class="art-piece" data-title="Full Sketch something" data-year="2025" data-src="assets/89b5ccdf-10d8-4eb9-921f-4e063a7d49c7.jfif">
         <img src="assets/89b5ccdf-10d8-4eb9-921f-4e063a7d49c7.jfif" alt="Full Sketch something" />
         <div class="art-overlay">
           <div class="art-title">Full Sketch something</div>
@@ -398,7 +451,7 @@
         </div>
       </div>
 
-      <!-- Art Piece 1 -->
+      <!-- Art Piece 2 -->
       <div class="art-piece" data-title="Pure Evil" data-year="2025" data-src="assets/301f687b-6d0c-4a54-a219-f2ec72a32cd5.jfif">
         <img src="assets/301f687b-6d0c-4a54-a219-f2ec72a32cd5.jfif" alt="Pure Evil" />
         <div class="art-overlay">
@@ -407,7 +460,7 @@
         </div>
       </div>
 
-            <!-- Art Piece 1 -->
+      <!-- Art Piece 3 -->
       <div class="art-piece" data-title="Florian Brand" data-year="2025" data-src="assets/1789d651-5ef3-4ab8-81a4-05d6db27c57e.jfif">
         <img src="assets/1789d651-5ef3-4ab8-81a4-05d6db27c57e.jfif" alt="Florian Brand" />
         <div class="art-overlay">
@@ -416,7 +469,7 @@
         </div>
       </div>
 
-            <!-- Art Piece 1 -->
+      <!-- Art Piece 4 -->
       <div class="art-piece" data-title="Pwet ni Richard Sterling" data-year="2025" data-src="assets/eb923e83-18ca-42ff-8f54-3536738e4737.jfif">
         <img src="assets/eb923e83-18ca-42ff-8f54-3536738e4737.jfif" alt="Pwet ni Richard Sterling" />
         <div class="art-overlay">
@@ -425,7 +478,7 @@
         </div>
       </div>
 
-            <!-- Art Piece 1 -->
+      <!-- Art Piece 5 -->
       <div class="art-piece" data-title="Matthias Czernin" data-year="2025" data-src="assets/ecfd8464-8cdf-47e4-a345-f47673de4b79.jfif">
         <img src="assets/ecfd8464-8cdf-47e4-a345-f47673de4b79.jfif" alt="Matthias Czernin" />
         <div class="art-overlay">
@@ -434,7 +487,7 @@
         </div>
       </div>
 
-            <!-- Art Piece 1 -->
+      <!-- Art Piece 6 -->
       <div class="art-piece" data-title="OPH.NAIB" data-year="2025" data-src="assets/ee1eb94b-1d69-410d-808e-11aeae0b66bb.jfif">
         <img src="assets/ee1eb94b-1d69-410d-808e-11aeae0b66bb.jfif" alt="OPH.NAIB" />
         <div class="art-overlay">
@@ -461,9 +514,16 @@
     <div class="contact-content">
       <p>Email: <strong><a href="mailto:luliaan.art@gmail.com">luliaan.art@gmail.com</a></strong></p>
       <p>Follow on Instagram: <strong><a href="https://www.instagram.com/luliaan_/" target="_blank">@luliaan_</a></strong></p>
-      <p>Follow on Twitter: <strong><a href="https://x.com/luliaan?fbclid=IwY2xjawN1cxVleHRuA2FlbQIxMABicmlkETFMYUhObU92dEVOaFJnREdtAR4fcCLFg_JAUTCt11zUXhF6w_6GrbeV1Ko8abPUDQ1vOwU4kmEIBTz0TXL-Wg_aem_wTia-xBD9OyoGAtNsmbuGw" target="_blank">@luliaan</a></strong></p>
-      <p>For more info please refer to <strong><a href="https://vgen.co/luliaan"  target="_blank"> here</a></strong></p>
+      <p>Follow on Twitter: <strong><a href="https://x.com/luliaan" target="_blank">@luliaan</a></strong></p>
+      <p>For more info please refer to <strong><a href="https://vgen.co/luliaan" target="_blank">here</a></strong></p>
       <p>Commissions are open!!!</p>
+
+      <!-- Dark Mode Toggle -->
+      <label class="theme-toggle">
+        <input type="checkbox" id="themeSwitch">
+        <span class="slider"></span>
+        <span>Dark Mode</span>
+      </label>
     </div>
   </section>
 
@@ -475,7 +535,7 @@
   <!-- Modal -->
   <div class="modal" id="artModal">
     <div class="modal-content">
-      <span class="close-modal">&times;</span>
+      <span class="close-modal">×</span>
       <img class="modal-img" id="modalImage" src="" alt="Enlarged Art">
       <div class="modal-caption">
         <div class="modal-title" id="modalTitle"></div>
@@ -525,15 +585,40 @@
 
     closeModal.addEventListener('click', closeModalFunc);
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModalFunc(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModalFunc(); });
+    document.addEventListener('keydown', (e) => { 
+      if (e.key === 'Escape' && modal.classList.contains('active')) closeModalFunc(); 
+    });
+
+    // Dark Mode Toggle
+    const themeSwitch = document.getElementById('themeSwitch');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeSwitch.checked = true;
+    }
+
+    themeSwitch.addEventListener('change', () => {
+      if (themeSwitch.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      }
+    });
 
     // Prevent Image Download
     document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
     document.addEventListener('keydown', e => {
-      if (e.ctrlKey || e.metaKey) { if ([65, 67, 83, 85, 117].includes(e.keyCode)) e.preventDefault(); }
+      if (e.ctrlKey || e.metaKey) { 
+        if ([65, 67, 83, 85, 117].includes(e.keyCode)) e.preventDefault(); 
+      }
       if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) e.preventDefault();
     });
-    document.querySelectorAll('img').forEach(img => { img.addEventListener('dragstart', e => e.preventDefault()); });
+    document.querySelectorAll('img').forEach(img => { 
+      img.addEventListener('dragstart', e => e.preventDefault()); 
+    });
   </script>
 </body>
 </html>
